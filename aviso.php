@@ -5,7 +5,7 @@
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['password']) == true)){
         unset($_SESSION['email']);
         unset($_SESSION['password']);
-        header('Location: login.php');
+        header('Location: index.html');
     }
     $logado = $_SESSION['email'];
 ?>
