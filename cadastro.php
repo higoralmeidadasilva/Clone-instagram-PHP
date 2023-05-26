@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
 
     $result = mysqli_query($conexão, "INSERT INTO usuarios(email,name,username,password) VALUES ('$email','$name','$username','$password')");
 
-    header('Location: index.html');
+    header('Location: index.php');
 }
 ?>
 
@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
             </div>
 
             <div class="panel singup">
-                <p>tem uma conta? <a href="index.html">Conecte-se</a></p>
+                <p>tem uma conta? <a href="index.php">Conecte-se</a></p>
             </div>
 
             <div class="apps">

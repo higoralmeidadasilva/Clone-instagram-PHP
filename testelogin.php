@@ -17,7 +17,7 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['passwor
     if (mysqli_num_rows($result) < 1) {
             unset($_SESSION['email']);
             unset($_SESSION['password']);
-            header('Location: index.html');
+            header('Location: index.php');
     } else {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $password;
@@ -25,6 +25,6 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['passwor
         }
     }else {
     //Não acessa
-    header('Location: index.html');
+    header('Location: index.php');
 }
 ?>
