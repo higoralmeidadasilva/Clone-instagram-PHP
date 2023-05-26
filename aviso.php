@@ -1,8 +1,16 @@
 <?php
-include ("protect.php")
+    session_start();
+    print_r($_SESSION);
+
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['password']) == true)){
+        unset($_SESSION['email']);
+        unset($_SESSION['password']);
+        header('Location: login.php');
+    }
+    $logado = $_SESSION['email'];
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

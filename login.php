@@ -1,45 +1,5 @@
-<?php
-include('conexao.php');
-
-// Verifica se o formulário foi enviado
-if (isset($_POST['username']) || isset($_POST['password'])) {
-
-    if (strlen($_POST['username']) == 0) {
-        echo "Peencha seu e-mail.";
-    } else if (strlen($_POST['password']) == 0) {
-        echo "Peencha sua senha.";
-    } else {
-
-        $username = $mysqli->real_escape_string($_POST['username']);
-        $password = $mysqli->real_escape_string($_POST['password']);
-
-        // Insere os dados no banco de dados
-        $sql_code = "SELECT * from usuarios WHERE username = '$username' AND password = '$password'";
-        $sql_query = $mysqli->query($sql_code) or die("Falha na conexão do código SQL: " . $mysqli->error);
-
-        $quantidade = $sql_query->num_rows;
-
-        if ($quantidade == 1) {
-            $usuario = $sql_query->fetch_assoc();
-
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['username'] = $usuario['username'];
-
-            header("Location: aviso.php");
-        }else {
-            echo "Falha ao logar! E-mail ou senha incorretos.";
-        }
-    }
-}
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -51,7 +11,6 @@ if (isset($_POST['username']) || isset($_POST['password'])) {
 </head>
 
 <body>
-
     <main>
         <section class="container">
             <div class="left">
@@ -62,11 +21,11 @@ if (isset($_POST['username']) || isset($_POST['password'])) {
             <div class="right">
                 <div class="panel login">
                     <img id="logo" src="img/Logo instagram preto.png" alt="Instagram logo">
-                    <form action="aviso.php" method="POST">
+                    <form action="testelogin.php" method="POST">
 
-                        <input class="input-box" type="text" name="username" required placeholder="Telefone, nome de usuário ou email">
-                        <input class="input-box" type="password" name="password" required placeholder="Senha">
-                        <input class="button" type="submit" name="entrar" value="Entrar">
+                        <input class="input-box" type="text" name="username" placeholder="Telefone, nome de usuário ou email" required>
+                        <input class="input-box" type="password" name="password" placeholder="Senha" required>
+                        <input class="button" type="submit" name="submit" value="Entrar">
 
                         <div class="divider">
                             <div class="line"></div>
@@ -80,7 +39,7 @@ if (isset($_POST['username']) || isset($_POST['password'])) {
                 </div>
 
                 <div class="panel singup">
-                    <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+                    <p>Não tem uma conta? <a href="./cadastro.php">Cadastre-se</a></p>
                 </div>
 
                 <div class="apps">
