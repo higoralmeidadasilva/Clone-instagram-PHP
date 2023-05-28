@@ -1,3 +1,38 @@
+<?php
+//include('config.php');
+include('conexao.php');
+
+if (isset($_POST['email']) || isset($_POST['password'])) {
+    if (strlen($_POST['email']) == 0) {
+        echo "Preencha seu email";
+    } else if (strlen($_POST['password']) == 0) {
+        echo "Preencha sua senha";
+    } else {
+        $email = $mysqli->real_escape_string($_POST['email']);
+        $password = $mysqli->real_escape_string($_POST['password']);
+
+        $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND password = '$password'";
+        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+
+        $quantidade = $sql_query->num_rows;
+
+        if ($quantidade == 1) {
+            $usuario = $sql_query->fetch_assoc();
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['name'] = $usuario['name'];
+
+            header("Location: aviso.php");
+        } else {
+            echo "Falha ao logar! Email ou senha incorretos";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -21,7 +56,8 @@
             <div class="right">
                 <div class="panel login">
                     <img id="logo" src="img/Logo instagram preto.png" alt="Instagram logo">
-                    <form action="testelogin.php" method="POST">
+
+                    <form action="aviso.php" method="POST">
 
                         <input class="input-box" type="text" name="username" placeholder="Telefone, nome de usuário ou email" required>
                         <input class="input-box" type="password" name="password" placeholder="Senha" required>

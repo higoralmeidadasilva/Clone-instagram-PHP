@@ -1,7 +1,5 @@
 <?php
-
-
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     // print_r($_POST['email']);
     // print_r($_POST['name']);
     // print_r($_POST['username']);
@@ -9,12 +7,13 @@ if(isset($_POST['submit'])){
 
     include_once('config.php');
 
+    $id = $_POST['id'];
     $email = $_POST['email'];
     $name = $_POST['name'];
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $result = mysqli_query($conexão, "INSERT INTO usuarios(email,name,username,password) VALUES ('$email','$name','$username','$password')");
+    $result = mysqli_query($conexão, "INSERT INTO usuarios(id, email, name, username, password) VALUES ('$id','$email','$name','$username','$password')");
 
     header('Location: index.php');
 }
