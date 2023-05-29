@@ -2,7 +2,7 @@
 $db_servidor = 'localhost';
 $db_user = 'root';
 $db_password = '';
-$db_nameDB = 'clone_instagram.sql';
+$db_nameDB = 'clone_instagram';
 
 $conexão = new mysqli($db_servidor, $db_user, $db_password, $db_nameDB);
 

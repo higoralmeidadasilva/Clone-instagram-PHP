@@ -12,7 +12,7 @@ if (isset($_POST['email']) || isset($_POST['password'])) {
         $password = $mysqli->real_escape_string($_POST['password']);
 
         $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND password = '$password'";
-        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->$error);
 
         $quantidade = $sql_query->num_rows;
 
